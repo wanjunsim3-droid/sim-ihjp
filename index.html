@@ -3,27 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>심완준 본부장의 비즈니스 리포트 허브</title>
+    <title>지산공감: AI 차세대 투자 리포트 허브</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         html { scroll-behavior: smooth; font-family: 'Pretendard', sans-serif; }
         .glass-morphism { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .report-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
-        .chart-container { position: relative; width: 100%; height: 300px; max-height: 400px; margin: auto; }
-        .view-transition { transition: opacity 0.3s ease-in-out; }
+        .report-card:hover { transform: translateY(-8px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .chart-container { position: relative; width: 100%; height: 320px; max-height: 400px; margin: auto; }
+        .view-transition { transition: opacity 0.4s ease-in-out; }
+        .ai-shimmer {
+            background: linear-gradient(90deg, #f0f4ff 25%, #dbeafe 50%, #f0f4ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .ai-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
     </style>
 
-    <!-- Chosen Palette: Navy & Platinum (Trust & Professionalism) -->
+    <!-- Chosen Palette: Navy, Slate & Electric Blue (Professional & High-Tech) -->
     <!-- Application Structure Plan: 
-         [구조] 메인 허브(전체 현장 리스트) <-> 상세 리포트 뷰(데이터 분석).
-         [작동 원리] JavaScript State Management를 활용하여 페이지 새로고침 없이 '현장 선택' 시 해당 데이터로 즉시 전환됩니다.
-         [사용자 흐름] 1. 본부장님의 전문성이 담긴 메인 페이지 접속 2. 관심 있는 현장(IHP, 송도, 마곡 등) 클릭 3. 인터랙티브 리포트 열람.
+         [구조] 메인 허브 <-> 현장별 심층 분석 리포트 + ✨ AI 인텔리전스 센터.
+         [업데이트 내용]
+         1. AI 미래 컨셉 이미지 생성 기능 제거 (요청 사항).
+         2. AI 분석 카드 레이아웃을 가로 전체 너비로 확장하여 시인성 개선.
+         3. AI 챗봇 및 오디오 브리핑 기능 유지.
     -->
-    <!-- Visualization & Content Choices: 
-         - 각 현장별로 최적화된 Chart.js 시각화 탑재. 마곡의 경우 기업 입주 현황을 막대 차트로 표현.
-         - NO SVG/Mermaid 사용. 순수 HTML/CSS 및 Canvas 기반 차트 활용.
-    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-slate-50 text-slate-800">
 
@@ -32,264 +42,380 @@
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             <div class="flex items-center space-x-2 cursor-pointer" onclick="showView('hub')">
                 <span class="text-2xl">🏢</span>
-                <h1 class="text-lg font-bold text-slate-900 tracking-tight uppercase">Sim Wan-Jun Portfolio</h1>
+                <h1 class="text-lg font-bold text-slate-900 tracking-tight uppercase">Jisan Gong-gam AI Portfolio</h1>
             </div>
-            <div id="nav-menu" class="hidden md:flex space-x-8 text-sm font-medium">
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
                 <button onclick="showView('hub')" class="hover:text-blue-700">전체 현장</button>
-                <button onclick="scrollToContact()" class="bg-blue-900 text-white px-4 py-1.5 rounded-full hover:bg-blue-800 transition">전문가 상담</button>
+                <button onclick="scrollToContact()" class="bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-900/20">전문가 상담</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hub View (Main Selection Page) -->
+    <!-- Hub View -->
     <div id="view-hub" class="view-transition">
-        <!-- Hero Section -->
-        <header class="py-20 bg-white border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <span class="text-blue-600 font-bold tracking-widest text-xs uppercase mb-4 block">Expert Insight Portfolio</span>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-                    데이터로 증명하는<br><span class="text-blue-900">비즈니스 가치</span>
+        <header class="py-24 bg-white border-b border-slate-100 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+                <div class="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full mb-4">✨ POWERED BY GEMINI AI</div>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight tracking-tighter">
+                    Sim본부장과 Ai가 만난<br><span class="text-blue-900 italic underline decoration-blue-200">차세대 투자 리포트</span>
                 </h2>
-                <p class="text-lg text-slate-500 max-w-2xl mx-auto">
-                    심완준 본부장이 직접 분석한 핵심 지역별 인터랙티브 리포트입니다.<br>각 현장의 로직과 데이터를 직접 확인하십시오.
+                <p class="text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+                    데이터는 증명하고, ✨ AI는 통찰합니다.<br>현장을 직접 방문한 것 이상의 몰입형 경험을 시작하세요.
                 </p>
+            </div>
+            <div class="absolute top-0 right-0 p-20 opacity-5 pointer-events-none">
+                <div class="text-[20rem] font-black">AI</div>
             </div>
         </header>
 
-        <!-- Project Grid -->
-        <section class="max-w-7xl mx-auto px-4 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: IHP -->
-                <div class="report-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer" onclick="loadReport('ihp')">
-                    <div class="h-48 bg-slate-200 relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <span class="text-xs font-bold bg-blue-600 px-2 py-1 rounded mb-1 inline-block">개통 완료</span>
-                            <h4 class="text-xl font-bold">청라 IHP 산단</h4>
+        <section class="max-w-7xl mx-auto px-4 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- IHP Card -->
+                <div class="report-card bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer group" onclick="loadReport('ihp')">
+                    <div class="h-56 bg-blue-900 relative flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-indigo-800 opacity-90 transition duration-700"></div>
+                        <div class="relative z-10 text-center text-white p-6">
+                            <span class="text-xs font-bold bg-blue-600 px-3 py-1 rounded-full mb-3 inline-block">분석 완료</span>
+                            <h4 class="text-2xl font-black">청라 IHP 산단</h4>
+                            <p class="text-sm text-blue-100 mt-2">제3연륙교 개통 영향 분석</p>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <p class="text-sm text-slate-600 mb-4">제3연륙교 개통에 따른 물류 혁명 및 기업 시너지 집중 분석</p>
-                        <div class="flex justify-between items-center text-xs font-bold text-blue-800">
-                            <span>가치 지수: +80% ↑</span>
-                            <span class="flex items-center">리포트 보기 <span class="ml-1">→</span></span>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 mb-4 text-blue-800 font-bold">
+                            <span>✨</span> <span class="text-sm">AI 심층 상담 가능</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: Songdo -->
-                <div class="report-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer" onclick="loadReport('songdo')">
-                    <div class="h-48 bg-slate-300 relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <span class="text-xs font-bold bg-green-600 px-2 py-1 rounded mb-1 inline-block">바이오 클러스터</span>
-                            <h4 class="text-xl font-bold">송도 11공구</h4>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-sm text-slate-600 mb-4">글로벌 바이오 메카로 도약하는 송도의 미래와 상업용지 가치</p>
-                        <div class="flex justify-between items-center text-xs font-bold text-green-800">
-                            <span>수익률 전망: 5.8%</span>
-                            <span class="flex items-center">리포트 보기 <span class="ml-1">→</span></span>
+                        <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed mb-6">항공 물류의 중심, IHP의 미래를 최첨단 AI가 시뮬레이션합니다.</p>
+                        <div class="flex items-center text-sm font-bold text-blue-900 uppercase">
+                            Open Smart Report <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3: Magok -->
-                <div class="report-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer" onclick="loadReport('magok')">
-                    <div class="h-48 bg-slate-400 relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <span class="text-xs font-bold bg-indigo-600 px-2 py-1 rounded mb-1 inline-block">MICE 거점</span>
-                            <h4 class="text-xl font-bold">마곡지구 CP구역</h4>
+                <!-- Songdo Card -->
+                <div class="report-card bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer group" onclick="loadReport('songdo')">
+                    <div class="h-56 bg-emerald-900 relative flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900 to-teal-800 opacity-90 transition duration-700"></div>
+                        <div class="relative z-10 text-center text-white p-6">
+                            <span class="text-xs font-bold bg-emerald-600 px-3 py-1 rounded-full mb-3 inline-block">바이오 메카</span>
+                            <h4 class="text-2xl font-black">송도 11공구</h4>
+                            <p class="text-sm text-emerald-100 mt-2">글로벌 바이오 입지 분석</p>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <p class="text-sm text-slate-600 mb-4">서울의 랜드마크 MICE 복합단지 개발과 대기업 클러스터 분석</p>
-                        <div class="flex justify-between items-center text-xs font-bold text-indigo-800">
-                            <span>기업 입주율: 95%</span>
-                            <span class="flex items-center">리포트 보기 <span class="ml-1">→</span></span>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 mb-4 text-emerald-800 font-bold">
+                            <span>✨</span> <span class="text-sm">AI 시세 예측 지원</span>
+                        </div>
+                        <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed mb-6">삼성바이오로직스 등 글로벌 클러스터의 시너지를 데이터로 증명합니다.</p>
+                        <div class="flex items-center text-sm font-bold text-emerald-900 uppercase">
+                            Open Smart Report <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 4: More coming soon -->
-                <div class="bg-slate-100 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center p-10 text-slate-400">
-                    <span class="text-3xl mb-2">➕</span>
-                    <p class="text-sm font-medium">새로운 분석 리포트 준비 중</p>
+                <!-- Magok Card -->
+                <div class="report-card bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer group" onclick="loadReport('magok')">
+                    <div class="h-56 bg-indigo-900 relative flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 to-slate-800 opacity-90 transition duration-700"></div>
+                        <div class="relative z-10 text-center text-white p-6">
+                            <span class="text-xs font-bold bg-indigo-600 px-3 py-1 rounded-full mb-3 inline-block">MICE Hub</span>
+                            <h4 class="text-2xl font-black">마곡 산업단지</h4>
+                            <p class="text-sm text-indigo-100 mt-2">서울 서남권의 미래 거점</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 mb-4 text-indigo-800 font-bold">
+                            <span>✨</span> <span class="text-sm">AI 심층 상담 지원</span>
+                        </div>
+                        <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed mb-6">대기업 R&D 클러스터와 스마트 시티 인프라의 가치를 분석합니다.</p>
+                        <div class="flex items-center text-sm font-bold text-indigo-900 uppercase">
+                            Open Smart Report <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Detail Report View (Dynamic Content) -->
-    <div id="view-report" class="hidden view-transition py-10">
-        <div class="max-w-5xl mx-auto px-4">
-            <button onclick="showView('hub')" class="mb-8 text-sm font-bold text-slate-500 hover:text-slate-800 flex items-center">
-                <span class="mr-2">←</span> 전체 현장으로 돌아가기
-            </button>
-            
-            <div id="report-content" class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-                <!-- Content injected via JS -->
+    <!-- Detail Report View -->
+    <div id="view-report" class="hidden view-transition pb-20">
+        <div class="bg-white border-b border-slate-200 py-6 sticky top-16 z-40 glass-morphism">
+            <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <button onclick="showView('hub')" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center mb-1">
+                        <span class="mr-1">←</span> 전체 현장 리스트
+                    </button>
+                    <h3 id="report-main-title" class="text-2xl font-black text-slate-900 tracking-tight">리포트 제목</h3>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="audio-btn" onclick="generateAudioBriefing()" class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 transition flex items-center">
+                        <span class="mr-2">🎧</span> ✨ AI 오디오 브리핑
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 mt-10">
+            <!-- ✨ AI Intelligence Hub -->
+            <div id="ai-hub" class="mb-12">
+                <!-- AI Analysis Card (Full Width) -->
+                <div class="bg-gradient-to-br from-indigo-900 to-blue-900 text-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl">✨</span>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-indigo-300">AI Deep Investment Insight</h4>
+                            </div>
+                            <div id="ai-loading" class="hidden"><div class="w-5 h-5 border-2 border-indigo-300 border-t-transparent rounded-full animate-spin"></div></div>
+                        </div>
+                        <p id="ai-summary-text" class="text-xl font-bold leading-relaxed mb-8">리포트를 로드하면 ✨ AI가 실시간으로 데이터를 분석하여 핵심 인사이트를 도출합니다.</p>
+                        <div class="flex space-x-4">
+                            <button onclick="generateAIInsight()" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-xl text-sm font-black transition border border-white/10">새로운 통찰 생성하기</button>
+                        </div>
+                    </div>
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-[20rem] pointer-events-none">🤖</div>
+                </div>
+            </div>
+
+            <!-- AI Chat Q&A -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-8 mb-12 shadow-sm">
+                <div class="flex items-center space-x-3 mb-6">
+                    <span class="text-xl">💬</span>
+                    <h4 class="text-lg font-black text-slate-900">✨ AI 투자 상담 챗봇</h4>
+                </div>
+                <div id="chat-box" class="h-56 overflow-y-auto mb-6 space-y-4 p-6 bg-slate-50 rounded-2xl text-sm scroll-smooth border border-slate-100">
+                    <div class="text-slate-500 italic">"대표님, 질문을 입력하시면 ✨ AI가 데이터에 기반하여 답변해 드립니다."</div>
+                </div>
+                <div class="flex gap-3">
+                    <input type="text" id="chat-input" placeholder="대표님의 질문을 입력해 주세요..." class="flex-1 bg-white border border-slate-200 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-sm" onkeypress="if(event.keyCode==13) sendChatMessage()">
+                    <button onclick="sendChatMessage()" class="bg-blue-900 text-white px-8 py-4 rounded-2xl font-black hover:bg-blue-800 transition shadow-lg shadow-blue-900/20">질문 전송 ✨</button>
+                </div>
+            </div>
+
+            <div id="report-content-container" class="space-y-12 pt-8">
+                <!-- Data Sections -->
             </div>
         </div>
     </div>
 
     <!-- Contact Footer -->
-    <footer id="footer-contact" class="bg-slate-900 text-white py-16 mt-20">
+    <footer id="footer-contact" class="bg-slate-900 text-white py-20 mt-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h3 class="text-3xl font-black mb-4">심완준 본부장</h3>
-            <p class="text-slate-400 mb-8 leading-relaxed">
-                단순한 매칭을 넘어 성공적인 비즈니스 공간을 컨설팅합니다.<br>현장의 데이터와 통계가 궁금하시다면 지금 바로 연락 주십시오.
-            </p>
-            <div class="inline-flex flex-col md:flex-row gap-4">
-                <a href="tel:1666-5984" class="bg-white text-slate-900 px-8 py-4 rounded-xl font-black text-xl hover:bg-slate-100 transition">
-                    ☎ 1666-5984
-                </a>
-            </div>
-            <p class="mt-8 text-xs text-slate-500">Copyright © 2026 Sim Wan-Jun. All rights reserved.</p>
+            <h3 class="text-4xl font-black mb-6 tracking-tight">지산공감</h3>
+            <p class="text-slate-400 mb-10 text-lg max-w-xl mx-auto">안티그레피 데이터와 ✨ AI 분석 로직을 바탕으로<br>최상의 비즈니스 공간을 컨설팅합니다.</p>
+            <a href="tel:1666-5984" class="inline-block bg-white text-slate-900 px-10 py-5 rounded-2xl font-black text-2xl hover:scale-105 transition shadow-2xl shadow-white/10">☎ 1666-5984</a>
         </div>
     </footer>
 
     <script>
+        const apiKey = "";
+        const textModel = "gemini-2.5-flash-preview-09-2025";
+        const ttsModel = "gemini-2.5-flash-preview-tts";
+        
+        let currentReportId = "";
+        let currentChartInstances = [];
+
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return await response.json();
+                    if (response.status !== 429 && response.status < 500) break;
+                } catch (e) {}
+                await new Promise(res => setTimeout(res, Math.pow(2, i) * 1000));
+            }
+            throw new Error("API Connection Failed");
+        }
+
+        async function callGemini(prompt, systemPrompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${textModel}:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            return await fetchWithRetry(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+
         const reportData = {
             ihp: {
                 title: "청라 IHP 도시첨단산업단지",
-                subtitle: "제3연륙교 개통에 따른 가치 현실화 분석",
                 color: "blue",
-                stats: [
-                    { label: "이동 시간", value: "15분", desc: "인천공항까지" },
-                    { label: "가치 상승", value: "+80%", desc: "개통 후 프리미엄" }
-                ],
-                content: "IHP 산단은 제3연륙교 개통으로 영종-청라 단일 생활권의 핵심이 되었습니다. 항공 물류 및 정밀 부품 산업의 거점으로 도약 중입니다.",
-                chartData: [45, 15] // 시간 단축 데이터
+                sections: [
+                    { title: "물류 패러다임 변화", content: "제3연륙교 개통으로 인천공항까지 15분. 항공 물류의 허브.", type: 'bar', labels: ["기존", "개통후"], data: [45, 15] },
+                    { title: "산업 생태계 시너지", content: "영종 MRO-청라 IHP 정밀 제조 벨트 구축.", type: 'doughnut', labels: ["부품", "MRO", "R&D", "지원"], data: [40, 30, 20, 10] }
+                ]
             },
             songdo: {
                 title: "송도국제도시 11공구",
-                subtitle: "바이오 클러스터 중심부 입지 분석",
-                color: "green",
-                stats: [
-                    { label: "기업 유치", value: "300+", desc: "글로벌 바이오 기업" },
-                    { label: "예상 수익", value: "5.8%", desc: "연평균 수익률" }
-                ],
-                content: "송도 11공구는 국내 최대 바이오 생산 거점으로 조성됩니다. 삼성바이오로직스, 셀트리온과의 시너지를 누릴 수 있는 최적의 기회입니다.",
-                chartData: [10, 40, 70, 95] // 연도별 유입 지수
+                color: "emerald",
+                sections: [
+                    { title: "바이오 생산 인프라", content: "삼성바이오-롯데바이오 인접 최대 클러스터.", type: 'bar', labels: ["기존", "11공구"], data: [210, 350] },
+                    { title: "산학연 연계 지표", content: "연세대 등 주요 대학 R&D 인력 수급 체계.", type: 'doughnut', labels: ["제조", "연구", "교육", "지원"], data: [45, 35, 15, 5] }
+                ]
             },
             magok: {
-                title: "서울 마곡 스마트 시티",
-                subtitle: "MICE 거점 및 대기업 R&D 클러스터 분석",
+                title: "마곡 지식산업센터 클러스터",
                 color: "indigo",
-                stats: [
-                    { label: "상주 인구", value: "16만+", desc: "R&D 전문 인력" },
-                    { label: "기업 규모", value: "150+", desc: "국내외 대기업 및 강소기업" }
-                ],
-                content: "마곡지구는 LG, 코오롱, 롯데 등 대기업 연구소가 밀집한 서울 최고의 R&D 거점입니다. 최근 CP구역 MICE 복합단지 개발로 비즈니스 가치가 정점에 달하고 있습니다.",
-                chartData: [150, 120, 90, 180] // 주요 기업 분포/입주 현황 예시
+                sections: [
+                    { title: "쿼드러플 교통망", content: "9호선 급행 등 강남-여의도-공항 30분대.", type: 'bar', labels: ["김포", "인천", "강남", "여의도"], data: [5, 35, 32, 15] },
+                    { title: "대기업 R&D 시너지", content: "LG사이언스파크 등 150여 대기업 클러스터.", type: 'doughnut', labels: ["IT/SW", "BT/바이오", "GT/녹색", "기타"], data: [50, 25, 15, 10] }
+                ]
             }
         };
 
-        let currentChart = null;
-
         function showView(view) {
-            const hub = document.getElementById('view-hub');
-            const report = document.getElementById('view-report');
-            
-            if (view === 'hub') {
-                hub.classList.remove('hidden');
-                report.classList.add('hidden');
-                window.scrollTo(0, 0);
-            } else {
-                hub.classList.add('hidden');
-                report.classList.remove('hidden');
-            }
+            document.getElementById('view-hub').classList.toggle('hidden', view !== 'hub');
+            document.getElementById('view-report').classList.toggle('hidden', view !== 'report');
+            if(view === 'hub') window.scrollTo(0, 0);
         }
 
         function loadReport(id) {
+            currentReportId = id;
             const data = reportData[id];
-            const contentDiv = document.getElementById('report-content');
+            document.getElementById('report-main-title').innerText = data.title;
+            const container = document.getElementById('report-content-container');
+            container.innerHTML = '';
             
-            // HTML Structure for the report
-            contentDiv.innerHTML = `
-                <div class="p-8 md:p-12 border-b border-slate-100">
-                    <span class="text-${data.color}-600 font-bold text-xs uppercase tracking-widest">${data.subtitle}</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2 mb-6">${data.title}</h2>
-                    <div class="grid grid-cols-2 gap-4 mb-8">
-                        ${data.stats.map(s => `
-                            <div class="bg-${data.color}-50 p-4 rounded-2xl border border-${data.color}-100">
-                                <div class="text-2xl font-black text-${data.color}-900">${s.value}</div>
-                                <div class="text-xs text-${data.color}-700 font-medium">${s.label}: ${s.desc}</div>
-                            </div>
-                        `).join('')}
+            document.getElementById('chat-box').innerHTML = `<div class="text-slate-500 italic text-center">"대표님, 질문을 입력하시면 ✨ AI가 데이터에 기반하여 답변해 드립니다."</div>`;
+            
+            currentChartInstances.forEach(c => c.destroy());
+            currentChartInstances = [];
+
+            data.sections.forEach((sec, idx) => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col lg:flex-row shadow-sm">
+                        <div class="lg:w-1/2 p-10 flex flex-col justify-center border-r border-slate-50">
+                            <h4 class="text-xl font-black text-slate-900 mb-4">${sec.title}</h4>
+                            <p class="text-slate-600 leading-relaxed text-sm">${sec.content}</p>
+                        </div>
+                        <div class="lg:w-1/2 bg-slate-50 p-10 flex items-center justify-center">
+                            <div class="chart-container"><canvas id="canvas-${idx}"></canvas></div>
+                        </div>
                     </div>
-                    <p class="text-slate-600 leading-relaxed mb-8">${data.content}</p>
-                </div>
-                <div class="p-8 md:p-12 bg-slate-50">
-                    <h4 class="font-bold text-slate-800 mb-6 flex items-center">
-                        <span class="w-1.5 h-6 bg-${data.color}-600 rounded-full mr-3"></span> 핵심 지표 시각화
-                    </h4>
-                    <div class="chart-container">
-                        <canvas id="dynamicChart"></canvas>
-                    </div>
-                </div>
-            `;
+                `;
+            });
 
             showView('report');
-            renderChart(id);
+            setTimeout(() => {
+                data.sections.forEach((sec, idx) => {
+                    const ctx = document.getElementById(`canvas-${idx}`).getContext('2d');
+                    const instance = new Chart(ctx, {
+                        type: sec.type,
+                        data: {
+                            labels: sec.labels,
+                            datasets: [{
+                                data: sec.data,
+                                backgroundColor: ['#1e40af', '#3b82f6', '#93c5fd', '#e0e7ff'],
+                                borderRadius: 12
+                            }]
+                        },
+                        options: { 
+                            responsive: true, 
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'bottom' } }
+                        }
+                    });
+                    currentChartInstances.push(instance);
+                });
+                generateAIInsight();
+            }, 100);
         }
 
-        function renderChart(id) {
-            const data = reportData[id];
-            const ctx = document.getElementById('dynamicChart').getContext('2d');
+        async function generateAIInsight() {
+            const data = reportData[currentReportId];
+            const textEl = document.getElementById('ai-summary-text');
+            const loading = document.getElementById('ai-loading');
             
-            if (currentChart) currentChart.destroy();
+            loading.classList.remove('hidden');
+            textEl.innerText = "✨ AI가 지산공감의 전문 데이터를 정밀 분석하고 있습니다...";
+            textEl.classList.add('ai-shimmer');
 
-            let type = 'line';
-            let labels = [];
-            let labelText = '';
+            const prompt = `현장: ${data.title}. 데이터: ${JSON.stringify(data.sections)}. 투자 가치를 정밀 분석하여 대표님께 드리는 인사이트를 한국어로 요약해줘.`;
+            const systemPrompt = "당신은 지산공감의 수석 AI 분석가입니다. 고객인 대표님께 예의 바르고 전문적인 어조로 답변하세요. 답변 시 상대방을 반드시 '대표님'이라고 지칭하세요. 매우 설득력 있고 논리적인 조언을 제공하세요.";
 
-            if (id === 'ihp') {
-                type = 'bar';
-                labels = ['기존 우회 시간', '제3연륙교 이용 시'];
-                labelText = '이동 시간 (분)';
-            } else if (id === 'songdo') {
-                type = 'line';
-                labels = ['2023', '2024', '2025', '현재'];
-                labelText = '가치 상승 지수';
-            } else if (id === 'magok') {
-                type = 'bar';
-                labels = ['대기업 R&D', 'MICE 지원', '강소기업', '공공기관'];
-                labelText = '섹터별 기업 분포';
+            try {
+                const res = await callGemini(prompt, systemPrompt);
+                textEl.innerText = res.candidates?.[0]?.content?.parts?.[0]?.text || "분석 데이터를 불러오는 데 실패했습니다.";
+            } catch (err) {
+                textEl.innerText = "AI 서버 연결이 지연되고 있습니다. 잠시 후 시도해 주세요.";
+            } finally {
+                loading.classList.add('hidden');
+                textEl.classList.remove('ai-shimmer');
             }
-
-            const config = {
-                type: type,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: labelText,
-                        data: data.chartData,
-                        backgroundColor: id === 'ihp' ? ['#cbd5e1', '#1e40af'] : (id === 'magok' ? ['#4f46e5', '#818cf8', '#a5b4fc', '#e0e7ff'] : 'rgba(16, 185, 129, 0.2)'),
-                        borderColor: id === 'songdo' ? '#10b981' : (id === 'magok' ? '#4f46e5' : '#1e40af'),
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true, grid: { color: '#e2e8f0' } }, x: { grid: { display: false } } }
-                }
-            };
-
-            currentChart = new Chart(ctx, config);
         }
 
-        function scrollToContact() {
-            document.getElementById('footer-contact').scrollIntoView({ behavior: 'smooth' });
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const box = document.getElementById('chat-box');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            input.value = "";
+            box.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 text-white px-5 py-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-md">${msg}</div></div>`;
+            box.scrollTop = box.scrollHeight;
+
+            const prompt = `질문: ${msg}. 프로젝트 데이터: ${JSON.stringify(reportData[currentReportId].sections)}`;
+            const systemPrompt = "당신은 지산공감의 전문 AI 상담 비서입니다. 리포트 데이터에 근거해 고객인 '대표님'께 친절하고 명확하게 답변하세요. 답변에 반드시 '대표님'이라는 호칭을 사용하세요. 모르는 것은 지산공감 상담 예약을 통해 상세 안내받으실 수 있도록 유도하세요.";
+            
+            try {
+                const res = await callGemini(prompt, systemPrompt);
+                const reply = res.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div class="flex justify-start"><div class="bg-white border border-slate-200 text-slate-700 px-5 py-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm">✨ ${reply}</div></div>`;
+                box.scrollTop = box.scrollHeight;
+            } catch (err) {
+                box.innerHTML += `<div class="text-red-500 text-xs text-center py-2 italic">상담 서비스가 일시적으로 지연되고 있습니다.</div>`;
+            }
         }
+
+        async function generateAudioBriefing() {
+            const data = reportData[currentReportId];
+            const btn = document.getElementById('audio-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="ai-pulse">✨ 브리핑 오디오 생성 중...</span>`;
+            btn.disabled = true;
+
+            const script = `대표님, 지산공감에서 준비한 ${data.title} 심층 리포트입니다. ${data.sections[0].content} 그리고 ${data.sections[1].content} 내용을 바탕으로 성공적인 투자 결정을 내리실 수 있도록 돕겠습니다.`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${ttsModel}:generateContent?key=${apiKey}`;
+            
+            try {
+                const res = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Say warmly and professionally: ${script}` }] }],
+                        generationConfig: { 
+                            responseModalities: ["AUDIO"], 
+                            speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } 
+                        }
+                    })
+                });
+
+                const audioData = res.candidates[0].content.parts[0].inlineData.data;
+                const sampleRate = parseInt(res.candidates[0].content.parts[0].inlineData.mimeType.match(/rate=(\d+)/)?.[1] || "24000");
+                const wavBlob = pcmToWav(audioData, sampleRate);
+                new Audio(URL.createObjectURL(wavBlob)).play();
+            } catch (err) { console.error(err); } 
+            finally { btn.innerHTML = originalText; btn.disabled = false; }
+        }
+
+        function pcmToWav(base64Pcm, sampleRate) {
+            const pcmData = Uint8Array.from(atob(base64Pcm), c => c.charCodeAt(0));
+            const wavHeader = new ArrayBuffer(44);
+            const view = new DataView(wavHeader);
+            view.setUint32(0, 0x52494646, false); view.setUint32(4, 36 + pcmData.length, true);
+            view.setUint32(8, 0x57415645, false); view.setUint32(12, 0x666d7420, false);
+            view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+            view.setUint32(24, sampleRate, true); view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true); view.setUint16(34, 16, true);
+            view.setUint32(36, 0x64617461, false); view.setUint32(40, pcmData.length, true);
+            return new Blob([wavHeader, pcmData], { type: 'audio/wav' });
+        }
+
+        function scrollToContact() { document.getElementById('footer-contact').scrollIntoView({ behavior: 'smooth' }); }
     </script>
 </body>
 </html>
